@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cartesian Coordinate System</title>
+    <link rel="stylesheet" href="static/styles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="canvas-container">
+        <canvas id="coordinateCanvas"></canvas>
+      </div>
+
+      <div class="controls">
+        <h2>Налаштування фігур</h2>
+        <form id="figureForm">
+          <label for="topLeftX">Координати верхньої лівої точки:</label>
+          <input type="number" id="topLeftX" placeholder="X" required />
+          <input type="number" id="topLeftY" placeholder="Y" required />
+
+          <label for="bottomLeftX">Координати нижньої лівої точки:</label>
+          <input type="number" id="bottomLeftX" placeholder="X" required />
+          <input type="number" id="bottomLeftY" placeholder="Y" required />
+
+          <label for="squareColor">Колір квадрата:</label>
+          <input type="color" id="squareColor" value="#ff0000" />
+
+          <label for="circleColor">Колір кола:</label>
+          <input type="color" id="circleColor" value="#0000ff" />
+
+          <button type="button" id="drawButton">Побудувати квадрат</button>
+        </form>
+
+        <div id="errorOutput" class="error-output"></div>
+      </div>
+    </div>
+
+    <script src="JS/functional.js"></script>
+  </body>
+</html>
