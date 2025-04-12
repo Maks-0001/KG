@@ -1,6 +1,3 @@
-/* Styles for the Bezier Curve Editor */
-
-/* General Layout */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -14,9 +11,8 @@ body {
     height: 100%;
 }
 
-/* Canvas Section */
 .canvas-section {
-    flex: 7; /* 70% of the space */
+    flex: 7; 
     background-color: #f9f9f9;
     display: flex;
     justify-content: center;
@@ -31,9 +27,8 @@ body {
     border: 1px solid #000;
 }
 
-/* Interaction Panel */
 .interaction-panel {
-    flex: 3; /* 30% of the space */
+    flex: 3; 
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -42,7 +37,7 @@ body {
     border-left: 1px solid #ccc;
 }
 
-/* Method Selection */
+
 .method-selection {
     margin-bottom: 20px;
 }
@@ -53,7 +48,7 @@ body {
     font-weight: bold;
 }
 
-/* Navigation Menu */
+
 .nav-menu {
     display: flex;
     justify-content: space-between;
@@ -81,9 +76,8 @@ body {
     color: black;
 }
 
-/* Windows */
 .window {
-    display: none; /* Hidden by default */
+    display: none; 
     background-color: #ffffff;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -104,21 +98,21 @@ body {
     margin-bottom: 15px;
 }
 
-/* Default active window */
+
 #editVerticesWindow {
-    display: block; /* Show by default */
+    display: block; 
 }
 
-/* Hidden class */
+
 .hidden {
     display: none !important;
 }
 
 .window.active {
-    display: block; /* Show active window */
+    display: block;
 }
 
-/* Edit Vertices Window */
+
 #editVerticesWindow ul {
     list-style: none;
     padding: 0;
@@ -127,9 +121,9 @@ body {
 
 #editVerticesWindow ul li {
     display: flex;
-    align-items: flex-start; /* Align items at the start */
+    align-items: flex-start; 
     justify-content: space-between;
-    flex-wrap: wrap; /* Allow wrapping for tooltip placement */
+    flex-wrap: wrap; 
     padding: 3px;
     border: 1px solid #000000;
     border-radius: 5px;
@@ -146,14 +140,14 @@ body {
 }
 
 #editVerticesWindow ul li .tooltip {
-    width: 100%; /* Ensure tooltip spans full width */
+    width: 100%; 
     font-size: 10px;
     color: #666;
     margin-top: 5px;
     text-align: left;
 }
 
-/* Output Points Window */
+
 #outputPointsWindow table {
     width: 100%;
     border-collapse: collapse;
@@ -173,7 +167,7 @@ body {
     color: #fff;
 }
 
-/* Bernstein Polynomials Window */
+
 #bernsteinPolynomialsWindow table {
     width: 100%;
     border-collapse: collapse;
@@ -193,7 +187,6 @@ body {
     color: #fff;
 }
 
-/* Input Fields Styling */
 .window input[type="number"] {
     width: 80px;
     padding: 5px;
