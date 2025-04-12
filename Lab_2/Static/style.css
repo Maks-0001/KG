@@ -1,0 +1,219 @@
+/* Styles for the Bezier Curve Editor */
+
+/* General Layout */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+}
+
+.main-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* Canvas Section */
+.canvas-section {
+    flex: 7; /* 70% of the space */
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #ccc;
+}
+
+#coordinateCanvas {
+    width: 70%;
+    height: 95%;
+    background-color: #ffffff;
+    border: 1px solid #000;
+}
+
+/* Interaction Panel */
+.interaction-panel {
+    flex: 3; /* 30% of the space */
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #f4f4f4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-left: 1px solid #ccc;
+}
+
+/* Method Selection */
+.method-selection {
+    margin-bottom: 20px;
+}
+
+.method-selection label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Navigation Menu */
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.nav-menu button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.nav-menu button:hover {
+    background-color: #0056b3;
+}
+
+.nav-menu button.active-button {
+    background-color: #66b3ff;
+    color: black;
+}
+
+/* Windows */
+.window {
+    display: none; /* Hidden by default */
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 80vh;
+    margin-bottom: 10px;
+}
+
+.window h3 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+/* Default active window */
+#editVerticesWindow {
+    display: block; /* Show by default */
+}
+
+/* Hidden class */
+.hidden {
+    display: none !important;
+}
+
+.window.active {
+    display: block; /* Show active window */
+}
+
+/* Edit Vertices Window */
+#editVerticesWindow ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+#editVerticesWindow ul li {
+    display: flex;
+    align-items: flex-start; /* Align items at the start */
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow wrapping for tooltip placement */
+    padding: 3px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    background-color: #dddcdc;
+    margin-bottom: 10px;
+}
+
+#editVerticesWindow ul li input {
+    width: 40%;
+    padding: 5px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+#editVerticesWindow ul li .tooltip {
+    width: 100%; /* Ensure tooltip spans full width */
+    font-size: 10px;
+    color: #666;
+    margin-top: 5px;
+    text-align: left;
+}
+
+/* Output Points Window */
+#outputPointsWindow table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#outputPointsWindow th,
+#outputPointsWindow td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+    font-size: 12px;
+}
+
+#outputPointsWindow th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Bernstein Polynomials Window */
+#bernsteinPolynomialsWindow table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#bernsteinPolynomialsWindow th,
+#bernsteinPolynomialsWindow td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+    font-size: 12px;
+}
+
+#bernsteinPolynomialsWindow th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Input Fields Styling */
+.window input[type="number"] {
+    width: 80px;
+    padding: 5px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+
+.window button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    margin: 15px;
+}
+
+.window button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="uk"></html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактор Кривих Безьє</title>
+    <link rel="stylesheet" href="Static/style.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- Секція Canvas -->
+        <div class="canvas-section">
+            <canvas id="coordinateCanvas"></canvas>
+        </div>
+
+        <!-- Панель Взаємодії -->
+        <div class="interaction-panel">
+            <div class="method-selection">
+                <label>
+                    <input type="radio" name="method" value="parametric" checked>
+                    Параметричний метод
+                </label>
+                <label>
+                    <input type="radio" name="method" value="recursive">
+                    Рекурсивний метод
+                </label>
+            </div>
+
+            <!-- Навігаційне Меню -->
+            <div class="nav-menu">
+                <button id="editVerticesBtn">Редагування вершин</button>
+                <button id="outputPointsBtn">Виведення точок кривої</button>
+                <button id="bernsteinPolynomialsBtn">Поліноми Бернштейна</button>
+            </div>
+
+            <!-- Вікна -->
+            <div id="editVerticesWindow" class="window">
+                <h3>Редагувати вершини</h3>
+                <div>
+                    <label for="vertexX">X:</label>
+                    <input type="number" id="vertexX">
+                    <label for="vertexY">Y:</label>
+                    <input type="number" id="vertexY">
+                    <button id="addVertexBtn">Додати вершину</button>
+                </div>
+                <ul id="verticesList"></ul>
+            </div>
+
+            <div id="outputPointsWindow" class="window hidden">
+                <h3>Вивести рівновіддалені точки кривої за параметром t</h3>
+                <label for="numPoints">Кількість точок:</label>
+                <input type="number" id="numPoints">
+                <button id="generatePointsBtn">Визначити точки</button>
+                <table id="pointsTable">
+                    <thead>
+                        <tr>
+                            <th>t</th>
+                            <th>X</th>
+                            <th>Y</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div id="bernsteinPolynomialsWindow" class="window hidden">
+                <h3>Обчислити перших n-2 поліномів Бернштейна</h3>
+                <label for="tValue">t:</label>
+                <input type="number" id="tValue" step="0.01" min="0" max="1">
+                <button id="calculatePolynomialsBtn">Обчислити</button>
+                <table id="polynomialsTable">
+                    <thead>
+                        <tr>
+                            <th>Поліном</th>
+                            <th>Значення</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>  
+
+    <script src="JS/functional.js"></script>
+</body>
+
+</html>
