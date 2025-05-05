@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fractal Visualization</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <div class="canvas-container">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <div class="controls">
+    <h1>Налаштування фракталу</h1>
+
+    <div class="parameter">
+      <label for="fractal-type">Тип фракталу:</label>
+      <select id="fractal-type">
+        <option value="sincos">z*sin(z)+c</option>
+        <option value="plasma">Плазма</option>
+      </select>
+    </div>
+
+    <div id="sincos-params">
+      <div class="parameter">
+        <label for="c-real">Реальна частина c:</label>
+        <input type="range" id="c-real" min="-2" max="2" step="0.01" value="0.1">
+        <div class="parameter-value" id="c-real-value">0.1</div>
+      </div>
+
+      <div class="parameter">
+        <label for="c-imag">Уявна частина c:</label>
+        <input type="range" id="c-imag" min="-2" max="2" step="0.01" value="0.1">
+        <div class="parameter-value" id="c-imag-value">0.1</div>
+      </div>
+
+      <div class="parameter">
+        <label for="max-iterations">Максимальна кількість ітерацій:</label>
+        <input type="range" id="max-iterations" min="10" max="500" step="10" value="100">
+        <div class="parameter-value" id="max-iterations-value">100</div>
+      </div>
+
+      <div class="parameter">
+        <label for="escape-radius">Радіус виходу:</label>
+        <input type="range" id="escape-radius" min="2" max="50" step="1" value="10">
+        <div class="parameter-value" id="escape-radius-value">10</div>
+      </div>
+
+      <div class="parameter" id="color-scheme-container">
+        <label for="color-scheme">Кольорова схема:</label>
+        <select id="color-scheme">
+          <option value="rainbow">Веселка</option>
+          <option value="blueviolet">Синьо-фіолетова</option>
+          <option value="greenyellow">Зелено-жовта</option>
+          <option value="fire" selected>Вогонь</option>
+          <option value="ocean">Океан</option>
+          <option value="blackwhite">Чорно-біла</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="plasma-params" style="display: none;">
+      <div class="parameter">
+        <label for="corner-color-1">Колір верхнього лівого кута:</label>
+        <input type="color" id="corner-color-1" value="#ff0000">
+      </div>
+
+      <div class="parameter">
+        <label for="corner-color-2">Колір верхнього правого кута:</label>
+        <input type="color" id="corner-color-2" value="#00ff00">
+      </div>
+
+      <div class="parameter">
+        <label for="corner-color-3">Колір нижнього лівого кута:</label>
+        <input type="color" id="corner-color-3" value="#0000ff">
+      </div>
+
+      <div class="parameter">
+        <label for="corner-color-4">Колір нижнього правого кута:</label>
+        <input type="color" id="corner-color-4" value="#ffff00">
+      </div>
+
+      <div class="parameter">
+        <label for="random-range">Межі випадкового числа:</label>
+        <input type="range" id="random-range" min="0" max="100" step="1" value="50">
+        <div class="parameter-value" id="random-range-value">50</div>
+      </div>
+    </div>
+
+    <button id="generate-btn">Згенерувати фрактал</button>
+    <button id="save-btn">Зберегти як зображення</button>
+    <button id="reset-btn">Скинути масштаб</button>
+
+    <div class="status" id="status">Готовий</div>
+  </div>
+</div>
+
+<script src="functional.js"></script>
+</body>
+</html>
