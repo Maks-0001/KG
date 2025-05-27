@@ -1,0 +1,425 @@
+/* Загальні стилі */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f6fa;
+    color: #222;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    min-height: 600px;
+}
+
+/* Ліва частина: зображення */
+.image-area {
+    flex: 1 1 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background: #fff;
+    position: relative;
+    min-width: 0;
+    overflow: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.image-placeholder {
+    width: 90%;
+    max-width: 550px;
+    height: 80%;
+    max-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e1e7ef;
+    border: 2px dashed #b0b8c9;
+    border-radius: 18px;
+    font-size: 1.1rem;
+    color: #7a869a;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s;
+    margin-top: 20px;
+}
+
+.image-placeholder:hover {
+    background: #d0d8e8;
+}
+
+#image-canvas {
+    max-width: 100%;
+    max-height: calc(100vh - 40px);
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(60,80,120,0.08);
+    background: #fff;
+    cursor: crosshair;
+}
+
+/* Права частина: меню */
+.sidebar {
+    width: 370px; 
+    min-width: 320px;
+    background: #f0f3fa;
+    box-shadow: -2px 0 16px rgba(60,80,120,0.07);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+    height: 100vh;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #dbe2ef;
+    background: #e9edf5;
+    height: 56px;
+    flex-shrink: 0;
+}
+
+.tab-btn {
+    flex: 1 1 0;
+    padding: 12px 5px; 
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 0.90rem; 
+    color: #6a768a;
+    cursor: pointer;
+    transition: background 0.15s, border-bottom 0.2s, color 0.2s;
+    outline: none;
+    text-align: center;
+}
+
+.tab-btn.active {
+    background: #f0f3fa;
+    border-bottom: 3px solid #4e7cff;
+    color: #2d3a5a;
+    font-weight: 600;
+}
+
+.tab-content {
+    flex: 1 1 0;
+    padding: 15px 12px;
+    overflow-y: auto;
+    min-height: 0;
+    padding-bottom: 70px; 
+}
+
+
+.tab-panel {
+    display: none;
+    animation: fadeIn 0.3s;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px);}
+    to { opacity: 1; transform: none;}
+}
+
+.tab-panel h2 {
+    margin-top: 0;
+    font-size: 1.05rem;
+    color: #3b4a6b;
+    margin-bottom: 12px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px; 
+    font-size: 0.95rem;
+    color: #4a5670;
+}
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    color: #4a5670;
+    margin-bottom: 10px;
+}
+.checkbox-label input[type="checkbox"] {
+    margin-right: 8px;
+}
+.checkbox-label .tooltip {
+    font-size: 0.8em;
+    color: #6c757d;
+    margin-left: 4px;
+}
+
+
+input[type="radio"] {
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.research-result {
+    margin-top: 15px; 
+    background: #e9edf5;
+    border-radius: 8px;
+    padding: 10px 12px; 
+    box-shadow: 0 1px 3px rgba(60,80,120,0.04);
+}
+
+.research-result h3, .pixel-info-container h3 {
+    margin: 0 0 8px 0; 
+    font-size: 0.98rem; 
+    color: #4e7cff;
+}
+#conversion-research-output p, #interactive-change-output {
+    font-size: 0.88rem;
+    color: #3d485a;
+    margin-bottom: 5px; 
+    line-height: 1.45; 
+}
+#conversion-research-output span, #interactive-change-output span {
+    font-weight: 500;
+    color: #2d3a5a;
+}
+#conversion-research-output .sub-detail {
+    margin-left: 15px;
+    font-size: 0.85rem;
+}
+#conversion-report-placeholder {
+    color: #7a869a;
+    font-style: italic;
+    padding: 10px 0;
+}
+
+/* Вкладка 2: Насиченість та вибір відтінку */
+.hue-range-selector-container {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #e9edf5;
+    border-radius: 6px;
+}
+
+.hue-range-selector-container label {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+.hue-range-selector-container label span {
+    font-weight: bold;
+    color: #4e7cff;
+}
+
+input[type="range"].hue-slider {
+    width: 100%;
+    margin-bottom: 10px;
+    accent-color: #6c7cff;
+}
+
+.hue-spectrum-display {
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to right, red 0%, yellow 16.66%, lime 33.33%, cyan 50%, blue 66.66%, magenta 83.33%, red 100%);
+    border-radius: 4px;
+    position: relative;
+    margin-top: 5px;
+}
+
+.hue-indicator {
+    position: absolute;
+    top: -3px;
+    bottom: -3px;
+    width: 3px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 1px;
+    pointer-events: none; 
+    box-shadow: 0 0 2px white;
+}
+
+
+input[type="number"] { 
+    width: 50px;
+    padding: 3px 5px;
+    border: 1px solid #b0b8c9;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    background: #fff;
+    text-align: right;
+}
+
+.slider-section {
+    margin-top: 15px; 
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.slider-section label {
+    margin-bottom: 0;
+}
+input[type="range"]#saturation-slider {
+     flex-grow: 1;
+    accent-color: #4e7cff;
+}
+
+#saturation-value {
+    min-width: 38px; 
+    display: inline-block;
+    font-weight: 500;
+    color: #4e7cff;
+    font-size: 0.98rem;
+}
+
+/* Sidebar actions (кнопки знизу) */
+.sidebar-actions {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 12px;
+    background: #e9edf5;
+    border-top: 1px solid #dbe2ef;
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    z-index: 10;
+    height: 60px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.sidebar-actions button {
+    padding: 7px 14px;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 6px;
+    background: #4e7cff;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s, filter 0.18s;
+    box-shadow: 0 1px 3px rgba(60,80,120,0.07);
+}
+
+.sidebar-actions button#reset-btn {
+    background: #e74c3c;
+}
+
+.sidebar-actions button:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 2px 6px rgba(60,80,120,0.10);
+}
+
+.magnifier {
+    position: absolute;
+    border: 2px solid #007bff;
+    border-radius: 50%; 
+    overflow: hidden;
+    width: 80px; 
+    height: 80px; 
+    pointer-events: none;
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    display: none; 
+}
+
+#magnifier-canvas {
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated; 
+}
+
+
+.pixel-info-container {
+    margin-top: 15px;
+    background: #e9edf5;
+    border-radius: 8px;
+    padding: 10px 12px; 
+    box-shadow: 0 1px 3px rgba(60,80,120,0.04);
+}
+.pixel-info-container p {
+    font-size: 0.9rem; 
+    margin-bottom: 5px; 
+    color: #3d485a;
+}
+.pixel-info-container span {
+    font-weight: 500;
+    color: #2d3a5a;
+}
+.pixel-detail {
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    margin-bottom: 5px; 
+    font-size: 0.9rem; 
+}
+.color-swatch {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #b0b8c9;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 4px;
+}
+#pixel-hover-placeholder {
+    color: #7a869a;
+    font-style: italic;
+    padding: 10px 0;
+}
+.info-text {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+/* --- Адаптивність --- */
+@media (max-width: 900px) {
+    .app-container {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+    .sidebar {
+        width: 100%;
+        min-width: 0;
+        position: relative;
+        height: auto;
+        max-height: 65vh; 
+        box-shadow: 0 -2px 10px rgba(60,80,120,0.1);
+        z-index: 100;
+    }
+    .image-area {
+        min-height: 200px;
+        height: 35vh; 
+        padding: 10px;
+        flex-shrink: 0;
+    }
+    #image-canvas {
+        max-height: calc(35vh - 20px);
+    }
+    .sidebar-actions {
+        height: 56px;
+        padding: 8px;
+        position: sticky;
+        bottom: 0;
+    }
+    .tab-content {
+        padding: 10px 8px;
+    }
+    .tabs {
+        height: 50px;
+    }
+    .tab-btn {
+        font-size: 0.85rem; 
+        padding: 10px 3px;
+    }
+    .magnifier { 
+        display: none !important;
+    }
+}

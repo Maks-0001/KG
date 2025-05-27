@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Досліди з моделями кольорів</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-container">
+    <div class="image-area" id="image-area">
+        <input type="file" id="image-input" accept="image/*" style="display:none;">
+        <div class="image-placeholder" id="image-placeholder">
+            <span>Зображення не обрано, натисніть для вибору зображення</span>
+        </div>
+        <canvas id="image-canvas" style="display:none;"></canvas>
+        <div class="magnifier" id="magnifier" style="display:none;">
+            <canvas id="magnifier-canvas"></canvas>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="tab1">Колірна схема</button>
+            <button class="tab-btn" data-tab="tab2">Насиченість</button>
+            <button class="tab-btn" data-tab="tab-analysis">Аналіз</button>
+            <button class="tab-btn" data-tab="tab3">Модифікація</button>
+        </div>
+        <div class="tab-content">
+            <div class="tab-panel active" id="tab1">
+                <h2>Вибір колірної схеми</h2>
+                <label>
+                    <input type="radio" name="color-space" value="RGB" checked> RGB
+                </label>
+                <label>
+                    <input type="radio" name="color-space" value="HSL"> HSL
+                </label>
+
+                <div class="pixel-info-container">
+                    <h3>Інформація про піксель під курсором</h3>
+                    <div id="pixel-hover-info" style="display:none;">
+                        <p>Координати: <span id="pixel-coords">-</span></p>
+                        <div class="pixel-detail">
+                            RGB: <span id="pixel-rgb-value">-</span> <div id="pixel-rgb-swatch" class="color-swatch"></div>
+                        </div>
+                        <div class="pixel-detail">
+                            HSL: <span id="pixel-hsl-value">-</span> <div id="pixel-hsl-swatch" class="color-swatch"></div>
+                        </div>
+                    </div>
+                    <p id="pixel-hover-placeholder">Наведіть курсор на зображення для отримання інформації.</p>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab2">
+                <h2>Зміна насиченості для вибраного діапазону відтінків</h2>
+                <div class="hue-range-selector-container">
+                    <label for="hue-from-slider">Діапазон відтінку ВІД: <span id="hue-from-value">0</span>°</label>
+                    <input type="range" id="hue-from-slider" min="0" max="360" value="0" class="hue-slider">
+
+                    <label for="hue-to-slider">Діапазон відтінку ДО: <span id="hue-to-value">30</span>°</label>
+                    <input type="range" id="hue-to-slider" min="0" max="360" value="30" class="hue-slider">
+                    
+                    <div class="hue-spectrum-display">
+                        <div id="hue-range-indicator-from" class="hue-indicator"></div>
+                        <div id="hue-range-indicator-to" class="hue-indicator"></div>
+                    </div>
+                     <input type="number" id="range-from" value="0" style="display:none;">
+                    <input type="number" id="range-to" value="30" style="display:none;">
+                </div>
+
+                <div class="slider-section">
+                    <label for="saturation-slider">Насиченість:</label>
+                    <input type="range" id="saturation-slider" min="0" max="200" value="100">
+                    <span id="saturation-value">100%</span>
+                </div>
+                <p class="info-text">Виділіть область на зображенні, щоб застосувати зміну насиченості.</p>
+                
+                <div class="research-result" style="margin-top: 15px;">
+                    <h3>Результати поточної інтерактивної зміни</h3>
+                    <div id="interactive-change-output">
+                        Зображення не зазнало інтерактивних змін.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-panel" id="tab-analysis">
+                <h2>Аналіз точності перетворення</h2>
+                 <div class="research-result">
+                    <h3 id="analysis-title">Аналіз перетворення</h3>
+                    <p id="analysis-description-title" style="font-weight: bold; margin-top: 5px; color: #3b4a6b;">Завантажте зображення для аналізу.</p>
+                    <div id="conversion-research-output">
+                        <p>Точність (незмінні пікселі): <span id="accuracy-val">-</span>%</p>
+                        <p>Середня помилка кольору (сума Δ): <span id="avg-error-val">-</span></p>
+                        <p>Максимальна помилка кольору: <span id="max-error-val">-</span></p>
+                        <p class="sub-detail">Координати: <span id="max-error-pixel-coords">-</span></p>
+                        <div class="pixel-detail sub-detail">
+                            Original: <span id="max-err-orig-color"></span> <div id="max-err-orig-swatch" class="color-swatch"></div>
+                        </div>
+                        <div class="pixel-detail sub-detail">
+                            Поточний: <span id="max-err-conv-color"></span> <div id="max-err-conv-swatch" class="color-swatch"></div>
+                        </div>
+                        <p>Мінімальна ненульова помилка: <span id="min-nz-error-val">-</span></p>
+                        <p>Відсоток змінених пікселів (суттєво): <span id="perc-changed-val">-</span>%</p>
+                        <p>Поканальна середня абс. помилка (R,G,B): <span id="channel-avg-error-val">-</span></p>
+                        <p>Поканальна макс. абс. помилка (R,G,B): <span id="channel-max-error-val">-</span></p>
+                        <p id="conversion-report-placeholder" style="display:none;">Завантажте зображення для аналізу.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab3">
+                <h2>Модифікація алгоритму</h2>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="modified-algorithm-checkbox"> Застосувати модифікований алгоритм HSL->RGB
+                    <span class="tooltip">(Збільшує насиченість червоних відтінків, зменшує для синіх)</span>
+                </label>
+                </div>
+        </div>
+        <div class="sidebar-actions">
+            <button id="save-btn">Зберегти зображення</button>
+            <button id="reset-btn">Скинути</button>
+        </div>
+    </aside>
+</div>
+<script src="functional.js"></script>
+</body>
+</html>
