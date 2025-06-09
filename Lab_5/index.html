@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Рух Фігури</title>
+  </head>
+  <body>
+    <main id="work">
+      <header class="work-header">
+        <h1>Динамічний рух та масштабування трикутника</h1>
+      </header>
+      <section class="work-section">
+        <div id="canvas-area">
+          <canvas id="myCanvas"></canvas>
+        </div>
+        <aside id="control-container">
+          <h2 class="panel-main-title">Панель керування</h2>
+
+          <div class="control-section">
+            <h3 class="control-section-title">1. Параметри трикутника</h3>
+            <p class="section-description">
+              Введіть координати трьох вершин для вашого трикутника: <br />
+              <strong>V<sub>1</sub> (X₁, Y₁)</strong>,
+              <strong>V<sub>2</sub> (X₂, Y₂)</strong>, та
+              <strong>V<sub>3</sub> (X₃, Y₃)</strong>.
+            </p>
+            <form id="triangle-config-form">
+              <div class="input-row">
+                <div class="input-group">
+                  <label for="v1x">Вершина 1 (X₁):</label>
+                  <input
+                    type="number"
+                    id="v1x"
+                    name="v1x"
+                    class="text-edit"
+                    placeholder="10"
+                  />
+                  <span class="error-message" id="v1x-error"></span>
+                </div>
+                <div class="input-group">
+                  <label for="v1y">Вершина 1 (Y₁):</label>
+                  <input
+                    type="number"
+                    id="v1y"
+                    name="v1y"
+                    class="text-edit"
+                    placeholder="10"
+                  />
+                  <span class="error-message" id="v1y-error"></span>
+                </div>
+              </div>
+
+              <div class="input-row">
+                <div class="input-group">
+                  <label for="v2x">Вершина 2 (X₂):</label>
+                  <input
+                    type="number"
+                    id="v2x"
+                    name="v2x"
+                    class="text-edit"
+                    placeholder="50"
+                  />
+                  <span class="error-message" id="v2x-error"></span>
+                </div>
+                <div class="input-group">
+                  <label for="v2y">Вершина 2 (Y₂):</label>
+                  <input
+                    type="number"
+                    id="v2y"
+                    name="v2y"
+                    class="text-edit"
+                    placeholder="10"
+                  />
+                  <span class="error-message" id="v2y-error"></span>
+                </div>
+              </div>
+
+              <div class="input-row">
+                <div class="input-group">
+                  <label for="v3x">Вершина 3 (X₃):</label>
+                  <input
+                    type="number"
+                    id="v3x"
+                    name="v3x"
+                    class="text-edit"
+                    placeholder="30"
+                  />
+                  <span class="error-message" id="v3x-error"></span>
+                </div>
+                <div class="input-group">
+                  <label for="v3y">Вершина 3 (Y₃):</label>
+                  <input
+                    type="number"
+                    id="v3y"
+                    name="v3y"
+                    class="text-edit"
+                    placeholder="60"
+                  />
+                  <span class="error-message" id="v3y-error"></span>
+                </div>
+              </div>
+              <span
+                class="error-message global-error"
+                id="triangle-config-error"
+              ></span>
+                 <button
+                    id="btn-create-triangle"
+                    class="control-button"
+                    type="button" 
+                    onclick="CreateTriangleBut()"
+                  >
+                    Створити/Оновити трикутник
+                  </button>
+            </form>
+          </div>
+
+          <div class="control-section">
+            <h3 class="control-section-title">2. Параметри руху та масштабування</h3>
+            <p class="section-description">
+              Трикутник рухатиметься вздовж прямої Y=X. <br />
+              Вкажіть відстань руху та коефіцієнт масштабування (k).
+            </p>
+
+            <form id="movement-config-form">
+              <div class="input-group">
+                <label for="travelDistance">Відстань руху (одиниць):</label>
+                <input
+                  type="number"
+                  id="travelDistance"
+                  name="travelDistance"
+                  class="text-edit"
+                  step="any"
+                  placeholder="напр. 10 (додатне/від'ємне)"
+                />
+                <span class="error-message" id="travelDistance-error"></span>
+              </div>
+              <div class="input-group">
+                <label for="scaleFactor">Коефіцієнт масштабування (k):</label>
+                <input
+                  type="number"
+                  id="scaleFactor"
+                  name="scaleFactor"
+                  class="text-edit"
+                  step="0.1"
+                  placeholder="1.5"
+                />
+                <span class="error-message" id="scaleFactor-error"></span>
+              </div>
+              <span
+                class="error-message global-error"
+                id="movement-config-error"
+              ></span>
+            </form>
+          </div>
+
+          <div class="control-section">
+            <h3 class="control-section-title">3. Збереження результатів</h3>
+            <div class="button-group column-buttons">
+              <button
+                id="saveMatrixBtn"
+                class="control-button secondary-action"
+                type="button"
+                onclick="SaveMatrixBut()"
+              >
+                Зберегти матрицю перетворень
+              </button>
+              <button
+                id="saveFigureBtn"
+                class="control-button secondary-action"
+                type="button"
+                onclick="SaveFigureBut()"
+              >
+                Зберегти початкову фігуру
+              </button>
+            </div>
+          </div>
+
+          <div class="control-section sticky-bottom" id="animate-section">
+            <h3 class="control-section-title">4. Керування анімацією</h3>
+            <div class="button-group">
+              <button
+                id="startResumeBtn"
+                class="control-button primary-action"
+                type="button"
+                onclick="StartMotion()"
+              >
+                Старт / Продовжити
+              </button>
+              <button
+                id="stopBtn"
+                class="control-button danger-action"
+                type="button"
+                onclick="StopMotion()"
+              >
+                Зупинити
+              </button>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="functional.js"></script>
+  </body>
+</html>
